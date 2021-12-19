@@ -1,6 +1,6 @@
 # Fluxtion 5 minute tutorial
 
-Simple 5 minute tutorial for fluxtion, all the implementation is in one class [Main](https://github.com/gregv12/Fluxtion-5-minute-tutorail/tree/master/src/main/java/com/fluxtion/examoke/fluxtion5minute)
+Simple 5 minute tutorial for fluxtion, all the implementation is in one class [Main](https://github.com/gregv12/Fluxtion-5-minute-tutorail/blob/master/src/main/java/com/fluxtion/examoke/fluxtion5minute/Main.java)
 
 ## Scenario:
 Control a car park entry gate for an automated carpark. Tracks number plates of cars leaving and entering with sensors
