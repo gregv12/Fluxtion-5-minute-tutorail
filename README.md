@@ -17,6 +17,49 @@ Control a car park entry gate for an automated carpark. Tracks number plates of 
 -  CarParkMonitor - keeps a count of spaces used by handling carIn and carOut events
 -  GateController - controls gate. Child of CarParkMonitor, closes gate when full. Handles RequestEntry events for queued cars and opens the gate when a space is free 
 
+## Running the example
+Run the main method from your ide and you should see similar output to below:
+```
+car in spaces used:1
+CAR PARK FULL
+car in spaces used:2
+CAR PARK FULL
+car in spaces used:3
+CAR PARK FULL
+car in spaces used:4
+CAR PARK FULL
+car in spaces used:5
+CAR PARK FULL
+car in spaces used:6
+CAR PARK FULL
+car in spaces used:7
+CAR PARK FULL
+car in spaces used:8
+CAR PARK FULL
+car in spaces used:9
+CAR PARK FULL
+car in spaces used:10
+CAR PARK FULL
+CAR PARK FULL please wait until gate opens
+CAR PARK FULL please wait until gate opens
+CAR PARK FULL please wait until gate opens
+CAR PARK FULL please wait until gate opens
+car out spaces used:9
+GATE OPEN - GATE:gate 1
+car in spaces used:10
+CAR PARK FULL
+car out spaces used:9
+GATE OPEN - GATE:gate 1
+car in spaces used:10
+CAR PARK FULL
+car out spaces used:9
+GATE OPEN - GATE:gate 2
+car in spaces used:10
+CAR PARK FULL
+
+Process finished with exit code 0
+```
+
 ### implementation notes:
 1. Create normal java classes for Events and event handlers.
 1. Annotate event handling methods in the user classes
@@ -24,7 +67,6 @@ Control a car park entry gate for an automated carpark. Tracks number plates of 
 1. Ask Fluxtion to build an event processor that will route events to the correct methods of user classes
 1. call SEPConfig#addNode for any root instance so the Fluxtion compiler knows what to include in the graph
 1. An {@link EventProcessor} is returned that will accept events from client code.
-
 
 To use the event processor client code must call init on the event processor to ensure all the instances are in a valid state before sending any events.
 
