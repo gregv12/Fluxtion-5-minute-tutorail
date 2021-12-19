@@ -69,6 +69,7 @@ public class Main {
 
     }
 
+    //USER CLASSES
     public static class CarParkMonitor {
 
         public int spacesUsed;
@@ -113,15 +114,12 @@ public class Main {
                 log("CAR PARK FULL - CLOSING GATE");
             }
         }
-
-
     }
 
-    public static class CarIn {
-    }
+    //EVENTS
+    public static class CarIn {}
 
-    public static class CarOut {
-    }
+    public static class CarOut {}
 
     @Value
     public static class RequestEntry {
