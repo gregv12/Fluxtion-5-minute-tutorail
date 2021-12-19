@@ -70,7 +70,7 @@ Process finished with exit code 0
 1. Build an object graph with normal java semantics using new etc.
 1. Ask Fluxtion to build an event processor that will route events to the correct methods of user classes
 1. call SEPConfig#addNode for any root instance so the Fluxtion compiler knows what to include in the graph
-1. An {@link EventProcessor} is returned that will accept events from client code.
+1. An EventProcessor is returned that will accept events from client code.
 
 To use the event processor client code must call init on the event processor to ensure all the instances are in a valid state before sending any events.
 
