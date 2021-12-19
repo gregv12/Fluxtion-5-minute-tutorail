@@ -18,7 +18,11 @@ Control a car park entry gate for an automated carpark. Tracks number plates of 
 -  GateController - controls gate. Child of CarParkMonitor, closes gate when full. Handles RequestEntry events for queued cars and opens the gate when a space is free 
 
 ## Running the example
-Run the main method from your ide and you should see similar output to below:
+Run the main method from your ide and you should see similar output to below. 
+
+-  A Processor.java file will be generated in: {project_build_dir}\target/generated-sources/fluxtion/com/fluxtion/examoke/fluxtion5minute/main
+-  A png of the execution graph will also be generated - {project_build_dir}\src/main/resources/com/fluxtion/examoke/fluxtion5minute/main/
+
 ```
 car in spaces used:1
 CAR PARK FULL
