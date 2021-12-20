@@ -3,22 +3,26 @@
 Simple 5 minute tutorial for fluxtion, all the implementation is in one class [Main](https://github.com/gregv12/Fluxtion-5-minute-tutorail/blob/master/src/main/java/com/fluxtion/examoke/fluxtion5minute/Main.java)
 
 ## Scenario:
-Control a car park entry gate for an automated carpark. Tracks number plates of cars leaving and entering with sensors
--  If there is enough capacity in the car park open the gate,
--  If carpark full flash full sign and close gate
--  If a car leaves and there is capacity open the gate where the first car was waiting
+Control a car park entry gate.
+An automated car park tracks the number plates of vehicles entering and leaving a car park. Events are fired by the
+sensors indicating either an arrival or a departure of a car. An automatic gate is lowered when the car park is full, an
+event is published from the gate when a car is waiting to enter the car park.
+-  If there is enough capacity in the car park open the gate
+-  When the car park is full flash full sign and close gate
+-  If a car leaves and there is capacity open the gate for the car that has waited the longest
 
 ### Events:
--  CarIn - a sensor detects cars coming into the carpark
--  CarOut - a sensor detects cars leaving the carpark
--  RequestEntry - the gate where a car is waiting to enter when park is full
+-  CarIn - a sensor detects cars coming into the car park
+-  CarOut - a sensor detects cars leaving the car park
+-  RequestEntry - Sent from the closed gate where a car is waiting to enter
 
 ### User classes
--  CarParkMonitor - keeps a count of spaces used by handling carIn and carOut events
--  GateController - controls gate. Child of CarParkMonitor, closes gate when full. Handles RequestEntry events for queued cars and opens the gate when a space is free 
+- CarParkMonitor - keeps a count of spaces used by handling carIn and carOut events
+- GateController - controls the gates sending open and close signals. Child of CarParkMonitor, closes gate when full. 
+ Handles RequestEntry events for queued cars and opens the gate when a space is free 
 
 ## Running the example
-Run the main method from your ide and you should see similar output to below. 
+Run the main method from your ide to generate similar output to that below. 
 
 -  A Processor.java file will be generated in: {project_build_dir}\target/generated-sources/fluxtion/com/fluxtion/examoke/fluxtion5minute/main
 -  A png of the execution graph will also be generated - {project_build_dir}\src/main/resources/com/fluxtion/examoke/fluxtion5minute/main/
