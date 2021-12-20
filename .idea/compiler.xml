@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Fluxtion-5minute" />
+        <module name="Fluxtion5minute" />
       </profile>
     </annotationProcessing>
   </component>

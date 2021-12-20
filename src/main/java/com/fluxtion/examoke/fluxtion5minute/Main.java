@@ -110,7 +110,7 @@ public class Main {
             if (!waitingGates.isEmpty() && carParkMonitor.getSpacesUsed() < capacity) {
                 RequestEntry entryRequest = waitingGates.remove();
                 log("GATE OPEN - GATE:" + entryRequest.getGateId());
-            }else{
+            }else if(carParkMonitor.getSpacesUsed() >= capacity){
                 log("CAR PARK FULL - CLOSING GATE");
             }
         }

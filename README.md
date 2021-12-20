@@ -25,25 +25,16 @@ Run the main method from your ide and you should see similar output to below.
 
 ```
 car in spaces used:1
-CAR PARK FULL
 car in spaces used:2
-CAR PARK FULL
 car in spaces used:3
-CAR PARK FULL
 car in spaces used:4
-CAR PARK FULL
 car in spaces used:5
-CAR PARK FULL
 car in spaces used:6
-CAR PARK FULL
 car in spaces used:7
-CAR PARK FULL
 car in spaces used:8
-CAR PARK FULL
 car in spaces used:9
-CAR PARK FULL
 car in spaces used:10
-CAR PARK FULL
+CAR PARK FULL - CLOSING GATE
 CAR PARK FULL please wait until gate opens
 CAR PARK FULL please wait until gate opens
 CAR PARK FULL please wait until gate opens
@@ -51,17 +42,15 @@ CAR PARK FULL please wait until gate opens
 car out spaces used:9
 GATE OPEN - GATE:gate 1
 car in spaces used:10
-CAR PARK FULL
+CAR PARK FULL - CLOSING GATE
 car out spaces used:9
 GATE OPEN - GATE:gate 1
 car in spaces used:10
-CAR PARK FULL
+CAR PARK FULL - CLOSING GATE
 car out spaces used:9
 GATE OPEN - GATE:gate 2
 car in spaces used:10
-CAR PARK FULL
-
-Process finished with exit code 0
+CAR PARK FULL - CLOSING GATE
 ```
 
 ### implementation notes:
