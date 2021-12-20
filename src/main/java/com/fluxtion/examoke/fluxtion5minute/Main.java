@@ -14,36 +14,43 @@ import java.util.Queue;
  * <p>
  * Scenario:
  * Control a car park entry gate.
- * Automatic carpark, tracks number plates of cars leaving and entering with sensors
- * If there is enough capacity in the car park open the gate,
- * If carpark full flash full sign and close gate
- * If a car leaves and there is capacity open the gate where the first car was waiting
+ * An automated car park tracks number plates of vehicles entering and leaving the car park. Events are fired by the
+ * sensors indicating either an arrival or a departure. An automatic gate can be lowered if the car park is full, an
+ * event is published from a gate when a car is waiting to enter the car park.
+ * <p>
+ * The following logic sis required:
+ * <ul>
+ *     <li>If there is enough capacity in the car park open the gate</li>
+ *     <li>If car park full flash full sign and close gate</li>
+ *     <li>If a car leaves and there is capacity open the gate for the car that has waited the longest</li>
+ * </ul>
  *
+ * <p>
  * Events:
- * CarIn - a sensor detects cars coming into the carpark
- * CarOut - a sensor detects cars leaving the carpark
+ * CarIn - a sensor detects cars coming into the car park
+ * CarOut - a sensor detects cars leaving the car park
  * RequestEntry - the gate where a car is waiting to enter when park is full
- *
- *Implementation notes:
- *
+ * <p>
+ * Implementation notes:
  * Create normal java classes for Events and event handlers.
  * Build an object graph with normal java semantics using new etc.
- * As Fluxtion to build an event processor that will route events to correct methods
- * call SEPConfig#addNode for any root instance.
- *
- * An {@link EventProcessor} is returned that will accept events from client code.
- *
- * must call init on the event processor to ensure all the instances are in a valid state before sending any events
- * 
+ * Use the Fluxtion utility to build an event processor that will route events to the correct instance methods
+ * <p>
+ * To build the graph call SEPConfig#addNode to add an instance to the graph. It is sufficient to add just the leaf
+ * nodes as Fluxtion will walk references by reflection and add any missing nodes to the graph.
+ * <p>
+ * Fluxtion will build An {@link EventProcessor} that accepts and processes events by calling {@link EventProcessor#onEvent(Object)}.
+ * <p>
+ * A client must call init on the event processor to ensure all the instances are in a valid state before sending any events
  */
 public class Main {
 
     public static void main(String[] args) {
 
-        EventProcessor processor = Fluxtion.compile(cfg ->
 // uncomment this line and run fully interpreted no java code is generated and compiled
-//        EventProcessor processor = Fluxtion.interpret(cfg ->
-                cfg.addNode( new GateController(new CarParkMonitor(), 10))
+//      EventProcessor processor = Fluxtion.interpret(cfg ->
+        EventProcessor processor = Fluxtion.compile(cfg ->
+                cfg.addNode(new GateController(new CarParkMonitor(), 10))
         );
         processor.init();
         //fill the car park up
@@ -69,8 +76,12 @@ public class Main {
 
     }
 
+    public interface CarParkCounter {
+        int getSpacesUsed();
+    }
+
     //USER CLASSES
-    public static class CarParkMonitor {
+    public static class CarParkMonitor implements CarParkCounter {
 
         public int spacesUsed;
 
@@ -93,7 +104,7 @@ public class Main {
 
     @Value
     public static class GateController {
-        CarParkMonitor carParkMonitor;
+        CarParkCounter carParkMonitor;
         int capacity;
         transient Queue<RequestEntry> waitingGates = new LinkedList<>();
 
@@ -110,16 +121,18 @@ public class Main {
             if (!waitingGates.isEmpty() && carParkMonitor.getSpacesUsed() < capacity) {
                 RequestEntry entryRequest = waitingGates.remove();
                 log("GATE OPEN - GATE:" + entryRequest.getGateId());
-            }else if(carParkMonitor.getSpacesUsed() >= capacity){
+            } else if (carParkMonitor.getSpacesUsed() >= capacity) {
                 log("CAR PARK FULL - CLOSING GATE");
             }
         }
     }
 
     //EVENTS
-    public static class CarIn {}
+    public static class CarIn {
+    }
 
-    public static class CarOut {}
+    public static class CarOut {
+    }
 
     @Value
     public static class RequestEntry {
